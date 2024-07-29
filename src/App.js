@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import useFetch from "./hooks/useFetch";
 
 function App() {
+  const [url, setUrl] = useState(
+    "https://api.themoviedb.org/3/movie/now_playing?api_key=7267155145f551a7cbf3e5ba1bae6ede"
+  );
+
+  const { data: movies } = useFetch(url);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>app</h1>
+
+      {movies &&
+        movies.map((movie) => (
+          <>
+            <p>{movie.id}</p>
+          </>
+        ))}
     </div>
   );
 }
